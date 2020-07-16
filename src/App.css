@@ -1,0 +1,36 @@
+.links {
+    justify-content: center;
+    margin-left: 100px;
+
+}
+
+.link {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: rgb(250, 250, 250);
+    text-decoration: none;
+    padding: 0 16px;
+}
+
+h2 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.cardStyle {
+    border-radius: "8px ";
+    overflow: "hidden";
+    margin: "10px"
+}
+
+.grid {
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    columns: 3
+}
