@@ -11,7 +11,6 @@ const FavouritesPage = () => {
 
   // достаем данные из localStore чтобы отрисовать помеченные карточки
   React.useEffect(() => {
-    console.log(list);
     updateList(list);
   }, []);
 

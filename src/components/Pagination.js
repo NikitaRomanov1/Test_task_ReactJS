@@ -1,28 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Pagination = ({
-  postsPerPage,
-  postsLength,
   paginate,
   nextPage,
   prevPage,
+  amountOfPages,
+  currentPage,
 }) => {
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(postsLength / postsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-  return (
-    <div style={{ alignItems: "center", justifyContent: "center" }}>
-      <ul className="pagination">
-        <li className="waves-effect">
-          <a href="#!" onClick={() => prevPage()}>
-            <i className="material-icons">chevron_left</i>
-          </a>
-        </li>
-        {pageNumbers.map((num) => (
-          <li className="waves-effect" key={num}>
+  const pageItems = [];
+  for (let num = 1; num <= amountOfPages; num++) {
+    currentPage == num
+      ? pageItems.push(
+          <li className="active indigo" key={num}>
             <a
-              href="#"
               onClick={() => {
                 paginate(num);
               }}
@@ -30,7 +20,29 @@ const Pagination = ({
               {num}
             </a>
           </li>
-        ))}
+        )
+      : pageItems.push(
+          <li className="waves-effect" key={num}>
+            <a
+              onClick={() => {
+                console.log(currentPage);
+                paginate(num);
+              }}
+            >
+              {num}
+            </a>
+          </li>
+        );
+  }
+  return (
+    <div style={{ alignItems: "center", justifyContent: "center" }}>
+      <ul className="pagination center">
+        <li className="waves-effect">
+          <a href="#!" onClick={() => prevPage()}>
+            <i className="material-icons">chevron_left</i>
+          </a>
+        </li>
+        {pageItems}
         <li className="waves-effect">
           <a href="#!" onClick={() => nextPage()}>
             <i className="material-icons">chevron_right</i>

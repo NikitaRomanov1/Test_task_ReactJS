@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import { Context } from "../context";
 const ImageCard = ({ post }) => {
-  const { toggleFavourite, color, filterColor } = React.useContext(Context);
+  const { toggleFavourite, filterColor } = React.useContext(Context);
 
   return (
     <div className="row">
@@ -16,18 +16,11 @@ const ImageCard = ({ post }) => {
         }}
       >
         <div className="card-image">
-          <img
-            src={post.download_url}
-            alt="can't find image"
-            //style={{ maxHeight: "200px" }}
-          />
+          <img src={post.download_url} alt="can't find image" />
           <button
-            className="btn-floating halfway-fab waves-effect waves-light "
-            style={
-              filterColor.includes(post.id)
-                ? { backgroundColor: "#689f38" }
-                : { backgroundColor: "red" }
-            }
+            className={`btn-floating halfway-fab waves-effect waves-light ${
+              filterColor.includes(post.id) ? "green " : "red"
+            }`}
             onClick={() => {
               toggleFavourite(post.id, post);
             }}

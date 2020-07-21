@@ -12,10 +12,13 @@ function App() {
     showLoading: true,
     currentPage: 1,
     postsPerPage: 10,
+    amountOfPages: 20,
   });
-  // const [showLoading, setShowLoading] = useState(true);
+  // переменные для работы c пагинацией
+  let { currentPage, amountOfPages, postsPerPage } = posts;
+  const cards = posts.posts;
 
-  const api = "https://picsum.photos/v2/list?page=2&limit=25";
+  const api = `https://picsum.photos/v2/list?page=${currentPage}&limit=${postsPerPage}`;
 
   // отправляется запрос на сервер, после ответа полученные данные заносятся в state posts
   useEffect(() => {
@@ -28,17 +31,7 @@ function App() {
     getPosts();
   }, []);
 
-  //переменные для работы c пагинацией
-  const currentPage = posts.currentPage;
-  const postsPerPage = posts.postsPerPage;
-  const postsLength = posts.posts.length;
-  const showLoading = posts.showLoading;
-  const cards = posts.posts;
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = cards.slice(indexOfFirstPost, indexOfLastPost);
-
-  //здесь хранятся id избранных постов чтобы менять цвет кнопки
+  // здесь хранятся id избранных постов чтобы менять цвет кнопки
   const [filterColor, setFilterColor] = React.useState([]);
 
   // state избранные посты
@@ -46,7 +39,7 @@ function App() {
 
   let listItems = [];
   let listId = [];
-  //добавление в state избранных постов из localStorage и id избранных постов
+  // добавление в state избранных постов из localStorage и id избранных постов
   const getDataFromLocalStorage = () => {
     Object.keys(localStorage).map((key) => {
       listItems = [...listItems, JSON.parse(localStorage.getItem(key))];
@@ -77,21 +70,31 @@ function App() {
   const updateList = (list) => {
     setList(list);
   };
-
+  // функция отправляет запрос с номером страницы, которая была нажата пользователем при пагинации
   const paginate = (pageNum) => {
-    setPosts({ ...posts, currentPage: pageNum });
+    setPosts({ ...posts, showLoading: true });
+    axios
+      .get(`https://picsum.photos/v2/list?page=${pageNum}&limit=10`)
+      .then((response) => {
+        setPosts({
+          ...posts,
+          posts: response.data,
+          currentPage: pageNum,
+          showLoading: false,
+        });
+      });
   };
-  //функция по нажатию на стрелочку вперед с проверкой на последнюю страницу
+  // функция по нажатию на стрелочку вперед с проверкой на последнюю страницу
   const nextPage = () => {
-    posts.currentPage == Math.ceil(postsLength / postsPerPage)
+    posts.currentPage == amountOfPages
       ? setPosts({ ...posts, currentPage: currentPage })
-      : setPosts({ ...posts, currentPage: currentPage + 1 });
+      : paginate(posts.currentPage + 1);
   };
-  //функция по нажатию на стрелочку назад с проверкой на первую страницу
+  // функция по нажатию на стрелочку назад с проверкой на первую страницу
   const prevPage = () => {
     posts.currentPage == 1
       ? setPosts({ ...posts, currentPage: 1 })
-      : setPosts({ ...posts, currentPage: currentPage - 1 });
+      : paginate(posts.currentPage - 1);
   };
 
   return (
@@ -102,12 +105,12 @@ function App() {
         posts,
         updateList,
         filterColor,
-        currentPosts,
-        postsPerPage,
-        postsLength,
+        cards,
         paginate,
-        nextPage,
         prevPage,
+        nextPage,
+        amountOfPages,
+        currentPage,
       }}
     >
       <BrowserRouter>

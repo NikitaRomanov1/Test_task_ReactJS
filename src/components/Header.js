@@ -1,5 +1,4 @@
 import React from "react";
-
 import { NavLink } from "react-router-dom";
 
 import "../App.css";
@@ -7,7 +6,7 @@ const Header = () => {
   return (
     <div className="navbar-fixed">
       <nav>
-        <div className="nav-wrapper  indigo">
+        <div className="nav-wrapper indigo">
           <a href="/" className="brand-logo right">
             Romanov Nikita
           </a>
