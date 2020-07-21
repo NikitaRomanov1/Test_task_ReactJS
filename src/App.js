@@ -59,8 +59,6 @@ function App() {
     if (localStorage.getItem(id, JSON.stringify(post))) {
       localStorage.removeItem(id);
       getDataFromLocalStorage();
-
-      console.log(list);
     } else {
       localStorage.setItem(id, JSON.stringify(post));
       getDataFromLocalStorage();

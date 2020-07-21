@@ -18,9 +18,8 @@ const ImageCard = ({ post }) => {
         <div className="card-image">
           <img src={post.download_url} alt="can't find image" />
           <button
-            className={`btn-floating halfway-fab waves-effect waves-light ${
-              filterColor.includes(post.id) ? "green " : "red"
-            }`}
+            className={`btn-floating halfway-fab waves-effect waves-light 
+            ${filterColor.includes(post.id) ? "green " : "red"}`}
             onClick={() => {
               toggleFavourite(post.id, post);
             }}

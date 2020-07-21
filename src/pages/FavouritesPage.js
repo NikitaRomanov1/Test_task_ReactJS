@@ -26,11 +26,7 @@ const FavouritesPage = () => {
           );
         })}
       </div>
-      <button
-        className="btn"
-        style={{ backgroundColor: "#3f51b5" }}
-        onClick={() => history.push("/")}
-      >
+      <button className="btn indigo" onClick={() => history.push("/")}>
         Назад
       </button>
     </div>

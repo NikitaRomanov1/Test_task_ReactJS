@@ -25,7 +25,6 @@ const Pagination = ({
           <li className="waves-effect" key={num}>
             <a
               onClick={() => {
-                console.log(currentPage);
                 paginate(num);
               }}
             >
