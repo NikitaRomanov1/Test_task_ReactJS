@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Pagination = ({
   paginate,
@@ -9,10 +9,11 @@ const Pagination = ({
 }) => {
   const pageItems = [];
   for (let num = 1; num <= amountOfPages; num++) {
-    currentPage == num
+    currentPage === num
       ? pageItems.push(
           <li className="active indigo" key={num}>
             <a
+              href="#"
               onClick={() => {
                 paginate(num);
               }}
@@ -24,6 +25,7 @@ const Pagination = ({
       : pageItems.push(
           <li className="waves-effect" key={num}>
             <a
+              href="#"
               onClick={() => {
                 paginate(num);
               }}

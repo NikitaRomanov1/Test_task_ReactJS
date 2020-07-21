@@ -16,7 +16,7 @@ const ImageCard = ({ post }) => {
         }}
       >
         <div className="card-image">
-          <img src={post.download_url} alt="can't find image" />
+          <img src={post.download_url} alt="can't find" />
           <button
             className={`btn-floating halfway-fab waves-effect waves-light 
             ${filterColor.includes(post.id) ? "green " : "red"}`}

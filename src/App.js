@@ -11,13 +11,12 @@ function App() {
     posts: [],
     showLoading: true,
     currentPage: 1,
-    postsPerPage: 10,
-    amountOfPages: 20,
+    postsPerPage: 12,
+    amountOfPages: 30,
   });
   // переменные для работы c пагинацией
   let { currentPage, amountOfPages, postsPerPage } = posts;
   const cards = posts.posts;
-
   const api = `https://picsum.photos/v2/list?page=${currentPage}&limit=${postsPerPage}`;
 
   // отправляется запрос на сервер, после ответа полученные данные заносятся в state posts
@@ -72,7 +71,9 @@ function App() {
   const paginate = (pageNum) => {
     setPosts({ ...posts, showLoading: true });
     axios
-      .get(`https://picsum.photos/v2/list?page=${pageNum}&limit=10`)
+      .get(
+        `https://picsum.photos/v2/list?page=${pageNum}&limit=${postsPerPage}`
+      )
       .then((response) => {
         setPosts({
           ...posts,
@@ -84,13 +85,13 @@ function App() {
   };
   // функция по нажатию на стрелочку вперед с проверкой на последнюю страницу
   const nextPage = () => {
-    posts.currentPage == amountOfPages
+    posts.currentPage === amountOfPages
       ? setPosts({ ...posts, currentPage: currentPage })
       : paginate(posts.currentPage + 1);
   };
   // функция по нажатию на стрелочку назад с проверкой на первую страницу
   const prevPage = () => {
-    posts.currentPage == 1
+    posts.currentPage === 1
       ? setPosts({ ...posts, currentPage: 1 })
       : paginate(posts.currentPage - 1);
   };

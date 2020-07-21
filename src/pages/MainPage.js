@@ -2,6 +2,8 @@ import React from "react";
 import { Context } from "../context";
 import ImageCard from "../components/ImageCard";
 import Pagination from "../components/Pagination";
+import Preloader from "../components/Preloader";
+
 import "../App.css";
 const MainPage = () => {
   const {
@@ -17,22 +19,7 @@ const MainPage = () => {
   return (
     <div className="container" style={{ width: "100%" }}>
       <h2>Images</h2>
-
-      {posts.showLoading && (
-        <div className="preloader-wrapper big active">
-          <div className="spinner-layer spinner-blue-only">
-            <div className="circle-clipper left">
-              <div className="circle"></div>
-            </div>
-            <div className="gap-patch">
-              <div className="circle"></div>
-            </div>
-            <div className="circle-clipper right">
-              <div className="circle"></div>
-            </div>
-          </div>
-        </div>
-      )}
+      {posts.showLoading && <Preloader />}
       <div className="grid ">
         {cards.map((item) => {
           return (
