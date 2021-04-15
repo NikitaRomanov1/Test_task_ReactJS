@@ -116,7 +116,7 @@ function App() {
         <Header />
         <div className="container">
           <Switch>
-            <Route exact path="/" component={MainPage} />
+            <Route exact path="/Test_task_ReactJS" component={MainPage} />
             <Route exact path="/favourites" component={FavouritesPage} />
             <Route />
           </Switch>
